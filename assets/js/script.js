@@ -14,6 +14,8 @@ async function getdata(currency) {
   } catch (error) {
     console.error(`Error: ${error.message}`);
     throw error;
+  } finally {
+    console.log("Búsqueda finalizada");
   }
 }
 
@@ -22,13 +24,13 @@ function getSelectedCurrency() {
   return value;
 }
 
-function formatCurrency(number) {
+/* function formatCurrency(number) {
   const uf = new Intl.NumberFormat("es-CL", {
     style: "currency",
     currency: "CLF",
   }).format(number);
   return uf;
-}
+} */
 
 async function carryOutCalculation() {
   try {
@@ -47,15 +49,11 @@ async function carryOutCalculation() {
   }
 }
 
-async function renderChart() {
-  const chart = document.getElementById("chart").getContext("2d");
-  const value = await getSelectedCurrency();
+function getChartData(value) {
   const slicedArr = value.serie.slice(0, 10);
-  console.log(slicedArr);
   const labels = slicedArr.map((label) => label.fecha);
   const data = slicedArr.map((data) => data.valor);
-  if (displayChart) displayChart.destroy();
-  displayChart = new Chart(chart, {
+  const config = {
     type: "line",
     data: {
       labels: labels,
@@ -69,7 +67,20 @@ async function renderChart() {
         },
       ],
     },
-  });
+  };
+  return config;
+}
+async function renderChart() {
+  try {
+    const value = await getSelectedCurrency();
+
+    const chart = document.getElementById("chart").getContext("2d");
+    const config = getChartData(value);
+    if (displayChart) displayChart.destroy();
+    displayChart = new Chart(chart, config);
+  } catch (error) {
+    console.log(error.message);
+  }
 }
 
 searchBtn.addEventListener("click", () => {
