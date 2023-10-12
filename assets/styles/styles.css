@@ -1,0 +1,85 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  background-color: rgb(49, 49, 49);
+  color: white;
+  font-family: sans-serif, monospace;
+}
+
+.conversor-cont {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  border-radius: 5px;
+  background: #0092ca;
+  color: black;
+  border: 5px solid rgb(255, 255, 255);
+  gap: 0.5em;
+  padding: 1em;
+  margin-bottom: 1em;
+}
+
+.conversor-cont > * {
+  align-self: center;
+}
+
+h2,
+h1 {
+  text-align: center;
+}
+
+h3 {
+  font-size: 1.3em;
+}
+
+#clp-input {
+  width: 70%;
+  height: 2em;
+  font-size: 1.5em;
+}
+
+.search-btn,
+#currency-select {
+  font-size: 1.5em;
+  width: 70%;
+}
+
+.search-btn {
+  background: #0092ca;
+  border: 3px solid black;
+  color: #eeeeee;
+  border-radius: 5px;
+  transition: cubic-bezier(0.075, 0.82, 0.165, 1) 0.5s;
+  margin-top: 0.5em;
+}
+
+.search-btn:hover {
+  background: #222831;
+  color: #eeeeee;
+}
+
+.search-btn:active {
+  background: #0092ca;
+}
+
+.result {
+  margin-top: 0.5em;
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.chart-cont {
+  width: 1200px;
+}
+
+img {
+  width: 300px;
+}
+
