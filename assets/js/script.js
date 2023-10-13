@@ -40,10 +40,9 @@ async function carryOutCalculation() {
     });
     const enteredValue = +input.value;
     const calc = enteredValue / latestValue[0];
-    convertedAmount.innerHTML = `${choiceParent.value} ${calc
+    convertedAmount.innerHTML = `Resultado: ${choiceParent.value} ${calc
       .toFixed(2)
       .toLocaleString("es-CL")}`;
-    console.log(value);
   } catch (error) {
     console.log(error.message);
   }
@@ -70,13 +69,20 @@ function getChartData(value) {
   };
   return config;
 }
+
+function updateChart(chart) {
+  if (chart) {
+    chart.destroy();
+  }
+}
+
 async function renderChart() {
   try {
     const value = await getSelectedCurrency();
-
     const chart = document.getElementById("chart").getContext("2d");
     const config = getChartData(value);
-    if (displayChart) displayChart.destroy();
+    /*     if (displayChart) displayChart.destroy(); */
+    updateChart(displayChart);
     displayChart = new Chart(chart, config);
   } catch (error) {
     console.log(error.message);
